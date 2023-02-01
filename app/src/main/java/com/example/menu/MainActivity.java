@@ -17,6 +17,7 @@ import com.example.menu.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    @Override // CARREGANDO MENU NA TELA { MENU DE TRÊS PONTINHOS}
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    @Override
+    @Override  //  TRABALHA COM OS INTENS DO MENU DE ACORDO COM SEU ID NO XML
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -60,8 +61,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        // ADICIONA EVENTO DE ACORDO COM O ID DO ELEMENTO DO MENU
         if (id == R.id.action_settings) {
+            setMsg("Botao clicado :"+ item.getTitle());
             return true;
+        }else if(id == R.id.curso){
+            setMsg("Botao clicado :"+ item.getTitle());
         }
 
         return super.onOptionsItemSelected(item);
@@ -73,4 +78,11 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+   public void setMsg( String  txt ){
+        Toast caixa = new Toast(this);
+       caixa.setText(txt);
+       caixa.show();
+   }
+
 }

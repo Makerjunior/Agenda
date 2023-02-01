@@ -2,9 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.menu.MainActivity">
+
+    <!-- e ITENS NO MENU   (Podemos criar varios aki) -->
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/configuracao"
         app:showAsAction="never" />
+    <item
+    android:id="@+id/curso"
+    android:orderInCategory="100"
+    android:title="@string/curso"
+    app:showAsAction="never" />
 </menu>
