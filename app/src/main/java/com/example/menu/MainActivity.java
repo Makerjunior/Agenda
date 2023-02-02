@@ -18,7 +18,7 @@ import com.example.menu.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-// Atualizado
+// Atualizado 1
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
