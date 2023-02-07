@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.menu"
-        minSdk 29
+        minSdk 25
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -29,6 +29,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    buildToolsVersion '33.0.1'
 }
 
 dependencies {
