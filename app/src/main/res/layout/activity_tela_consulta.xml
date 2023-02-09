@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tex"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".tela_consulta">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +12,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agenda"
+            android:text="Consultar"
             android:textAlignment="center"
             android:textSize="48sp" />
 
@@ -26,51 +24,43 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/idLabelNomeTConsulta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome :"
-                android:textSize="24sp" />
+                android:textSize="48sp" />
 
             <EditText
-                android:id="@+id/Ed_nome"
+                android:id="@+id/idNomeTConsulta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Digite o nome."
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Contato :"
-                android:textSize="24sp" />
+                android:textSize="48sp" />
 
             <EditText
-                android:id="@+id/Ed_contato"
+                android:id="@+id/idContatoTConsulta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Digite o contato."
                 android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -84,11 +74,11 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/Btn_salvar"
+                android:id="@+id/Btn_TAnterior"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Salvar" />
+                android:text="Anterior" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -96,19 +86,17 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/Btn_buscar"
+                android:id="@+id/BtnTProximo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="AbrirTelaConsulta"
-                android:text="Buscar" />
+                android:text="Próximo" />
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -141,22 +129,18 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/Btn_sair"
+                android:id="@+id/BtnT_Voltar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:onClick="sair"
-                android:text="Sair" />
+                android:onClick="fechaTela"
+                android:text="Voltar" />
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-
-
         </LinearLayout>
-
     </LinearLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
