@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         CriarAbrirBD();
-
+        AbrirTabela();
+        fecharDB();
         Log.v("inic","Aplicativo Iniciado");
     }
 
@@ -56,16 +57,17 @@ public class MainActivity extends AppCompatActivity {
         }catch ( Exception ex){
             msg("Erro em criar banco de dados.");
         }
+    }
 
+    public  void AbrirTabela() {
         try {
             BD.execSQL("CREATE TABLE IF NOT EXISTS Contatos(id INTEGER PRIMARY KEY, nome TEXT, fone Text );");
-        } catch ( Exception ex){
+        } catch (Exception ex) {
             msg("Erro ao criar tabela Contatos.");
-        }finally {
-            msg("Tabela Contatos criada com sucesso.");
-
         }
     }
+
+ //
 
     // Fechar Banco de Dados
    public  void fecharDB(){
@@ -78,6 +80,28 @@ public class MainActivity extends AppCompatActivity {
         Intent telaConsulta = new Intent(this, tela_consulta.class);
         startActivity(telaConsulta);
 
+    }
+
+    public  void AdicionarDados( View V) {
+        String StNome, StContact;
+        StNome = EdNome.getText().toString();
+        StContact = EdContato.getText().toString();
+        if (StNome == " " || StContact == " ") {
+            msg("Campos não podem ser vazios");
+            return;
+        }
+
+        CriarAbrirBD();
+        try {
+            BD.execSQL("INSERT INTO COntatos (nome,fone) VALUES ('" + StNome + "','" + StContact + "')");
+        } catch (Exception Ex) {
+            msg("Erro ao adicionar contato");
+        } finally {
+            msg("COntato adicionado com susseço");
+        }
+      fecharDB();
+        EdNome.setText(null);
+        EdContato.setText(null);
     }
 
 

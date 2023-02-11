@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome :"
-                android:textSize="48sp" />
+                android:textSize="34sp" />
 
             <EditText
                 android:id="@+id/idNomeTConsulta"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Contato :"
-                android:textSize="48sp" />
+                android:textSize="34sp" />
 
             <EditText
                 android:id="@+id/idContatoTConsulta"
@@ -78,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="AnteriorRegistro"
                 android:text="Anterior" />
 
             <Space
@@ -90,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="ProximoRegistro"
                 android:text="Próximo" />
 
             <Space
