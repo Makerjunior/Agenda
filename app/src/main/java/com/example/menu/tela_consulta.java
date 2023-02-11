@@ -16,8 +16,6 @@ public class tela_consulta extends AppCompatActivity {
     EditText EdNome, EdContato;
     Button BTnAnterior, BTnProximo, BTnVoltar;
 
-    // Banco de dados {OBJ}
-    SQLiteDatabase BD = null;
     Cursor cursor;
 
     @Override
@@ -30,42 +28,15 @@ public class tela_consulta extends AppCompatActivity {
         BTnAnterior = (Button) findViewById(R.id.Btn_TAnterior);
         BTnVoltar = (Button) findViewById(R.id.BtnT_Voltar);
 
-        BuscaDados();
-    }
-
-    // Abrir Banco
-    public void CriarAbrirBD() {
-        try {
-            BD = openOrCreateDatabase("BancoAgenda", MODE_PRIVATE, null);
-        } catch (Exception ex) {
-            Msg.mensagem("Erro em criar banco de dados.", this);
-        }
-    }
-
-    // Fechar Banco de Dados
-    public void fecharDB() {
-        BD.close();
-    }
-
-    // Buscar contatos
-    public void BuscaDados() {
-        CriarAbrirBD();
-
-        cursor = BD.query("Contatos",
-                new String[]{"nome", "fone"},
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+       cursor=Banco.BuscaDados(this);
         if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
+
             MostraDados();
         } else {
             Msg.mensagem("Cadastro não encotrado", this);
         }
     }
+
 
     // Mosta dados
     public void MostraDados() {
