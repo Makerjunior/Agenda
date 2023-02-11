@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Abrir Tabela
     public  void AbrirTabela() {
         try {
             BD.execSQL("CREATE TABLE IF NOT EXISTS Contatos(id INTEGER PRIMARY KEY, nome TEXT, fone Text );");
@@ -67,21 +68,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
- //
-
     // Fechar Banco de Dados
-   public  void fecharDB(){
+    public  void fecharDB(){
         BD.close();
    }
 
-
-    // Abrindo tela de colsulta
-    public void AbrirTelaConsulta( View V){
-        Intent telaConsulta = new Intent(this, tela_consulta.class);
-        startActivity(telaConsulta);
-
-    }
-
+    // Adicionar Dados
     public  void AdicionarDados( View V) {
         String StNome, StContact;
         StNome = EdNome.getText().toString();
@@ -97,15 +89,26 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception Ex) {
             msg("Erro ao adicionar contato");
         } finally {
-            msg("COntato adicionado com susseço");
+            msg("Contato adicionado com susseço");
         }
-      fecharDB();
+        fecharDB();
         EdNome.setText(null);
         EdContato.setText(null);
     }
 
+    //Exluir tabela
+    public void ApagarTabela(){
+        BD.execSQL("DELETE FROM Contatos");
+    }
 
-   //Sair do Aplicativo
+    // Abrindo tela de colsulta
+    public void AbrirTelaConsulta( View V){
+        Intent telaConsulta = new Intent(this, tela_consulta.class);
+        startActivity(telaConsulta);
+
+    }
+
+    //Sair do Aplicativo
     public  void sair(View V){
        /* Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Mensagens
     public  void  msg( String txt){
         AlertDialog.Builder msg = new AlertDialog.Builder(this);
         msg.setMessage(txt);
