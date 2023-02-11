@@ -7,11 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
+import com.example.menu.databinding.ActivityMainBinding;
+
+import java.util.logging.LogManager;
 
 
 // Impots Banco de dados
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
+import android.widget.*;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             BD=openOrCreateDatabase("BancoAgenda",MODE_PRIVATE,null);
         }catch ( Exception ex){
-            Msg.mensagem("Erro em criar banco de dados.",this);
+            msg("Erro em criar banco de dados.");
         }
     }
 
@@ -56,16 +63,19 @@ public class MainActivity extends AppCompatActivity {
         try {
             BD.execSQL("CREATE TABLE IF NOT EXISTS Contatos(id INTEGER PRIMARY KEY, nome TEXT, fone Text );");
         } catch (Exception ex) {
-            Msg.mensagem("Erro ao criar tabela Contatos.",this);
+            msg("Erro ao criar tabela Contatos.");
         }
     }
+
+ //
 
     // Fechar Banco de Dados
    public  void fecharDB(){
         BD.close();
    }
 
-   // Abrindo tela de colsulta
+
+    // Abrindo tela de colsulta
     public void AbrirTelaConsulta( View V){
         Intent telaConsulta = new Intent(this, tela_consulta.class);
         startActivity(telaConsulta);
@@ -77,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         StNome = EdNome.getText().toString();
         StContact = EdContato.getText().toString();
         if (StNome == " " || StContact == " ") {
-            Msg.mensagem("Campos não podem ser vazios",this);
+            msg("Campos não podem ser vazios");
             return;
         }
 
@@ -85,16 +95,17 @@ public class MainActivity extends AppCompatActivity {
         try {
             BD.execSQL("INSERT INTO COntatos (nome,fone) VALUES ('" + StNome + "','" + StContact + "')");
         } catch (Exception Ex) {
-            Msg.mensagem("Erro ao adicionar contato",this);
+            msg("Erro ao adicionar contato");
         } finally {
-            Msg.mensagem("COntato adicionado com susseço",this);
+            msg("COntato adicionado com susseço");
         }
       fecharDB();
         EdNome.setText(null);
         EdContato.setText(null);
     }
 
-    //Sair do Aplicativo
+
+   //Sair do Aplicativo
     public  void sair(View V){
        /* Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -105,13 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
- public  void ApagarTabela( String StTabela){
-        try {
-            BD.execSQL("DELETE FROM '"+StTabela+"'" );
-        }catch (Exception Ex){
-            Msg.mensagem("Erro ao apagar tabela",this);
-        }
+    public  void  msg( String txt){
+        AlertDialog.Builder msg = new AlertDialog.Builder(this);
+        msg.setMessage(txt);
+        msg.setNegativeButton("OK",null);
+        msg.show();
 
- }
+    }
 
 }
