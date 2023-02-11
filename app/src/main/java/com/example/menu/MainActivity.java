@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             BD=openOrCreateDatabase("BancoAgenda",MODE_PRIVATE,null);
         }catch ( Exception ex){
-            msg("Erro em criar banco de dados.");
+            Msg.mensagem("Erro em criar banco de dados.",this);
         }
     }
 
@@ -63,19 +63,16 @@ public class MainActivity extends AppCompatActivity {
         try {
             BD.execSQL("CREATE TABLE IF NOT EXISTS Contatos(id INTEGER PRIMARY KEY, nome TEXT, fone Text );");
         } catch (Exception ex) {
-            msg("Erro ao criar tabela Contatos.");
+            Msg.mensagem("Erro ao criar tabela Contatos.",this);
         }
     }
-
- //
 
     // Fechar Banco de Dados
    public  void fecharDB(){
         BD.close();
    }
 
-
-    // Abrindo tela de colsulta
+   // Abrindo tela de colsulta
     public void AbrirTelaConsulta( View V){
         Intent telaConsulta = new Intent(this, tela_consulta.class);
         startActivity(telaConsulta);
@@ -87,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         StNome = EdNome.getText().toString();
         StContact = EdContato.getText().toString();
         if (StNome == " " || StContact == " ") {
-            msg("Campos não podem ser vazios");
+            Msg.mensagem("Campos não podem ser vazios",this);
             return;
         }
 
@@ -95,17 +92,16 @@ public class MainActivity extends AppCompatActivity {
         try {
             BD.execSQL("INSERT INTO COntatos (nome,fone) VALUES ('" + StNome + "','" + StContact + "')");
         } catch (Exception Ex) {
-            msg("Erro ao adicionar contato");
+            Msg.mensagem("Erro ao adicionar contato",this);
         } finally {
-            msg("COntato adicionado com susseço");
+            Msg.mensagem("COntato adicionado com susseço",this);
         }
       fecharDB();
         EdNome.setText(null);
         EdContato.setText(null);
     }
 
-
-   //Sair do Aplicativo
+    //Sair do Aplicativo
     public  void sair(View V){
        /* Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -116,12 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public  void  msg( String txt){
-        AlertDialog.Builder msg = new AlertDialog.Builder(this);
-        msg.setMessage(txt);
-        msg.setNegativeButton("OK",null);
-        msg.show();
 
-    }
 
 }

@@ -13,12 +13,13 @@ import android.widget.EditText;
 
 public class tela_consulta extends AppCompatActivity {
 
-   EditText EdNome,EdContato;
-   Button BTnAnterior,BTnProximo,BTnVoltar;
+    EditText EdNome, EdContato;
+    Button BTnAnterior, BTnProximo, BTnVoltar;
 
     // Banco de dados {OBJ}
-    SQLiteDatabase BD=null;
+    SQLiteDatabase BD = null;
     Cursor cursor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,87 +34,78 @@ public class tela_consulta extends AppCompatActivity {
     }
 
     // Abrir Banco
-    public  void  CriarAbrirBD(){
+    public void CriarAbrirBD() {
         try {
-            BD=openOrCreateDatabase("BancoAgenda",MODE_PRIVATE,null);
-        }catch ( Exception ex){
-            msg("Erro em criar banco de dados.");
+            BD = openOrCreateDatabase("BancoAgenda", MODE_PRIVATE, null);
+        } catch (Exception ex) {
+            Msg.mensagem("Erro em criar banco de dados.", this);
         }
     }
 
     // Fechar Banco de Dados
-    public  void fecharDB(){
+    public void fecharDB() {
         BD.close();
     }
 
     // Buscar contatos
-    public  void  BuscaDados(){
+    public void BuscaDados() {
         CriarAbrirBD();
 
-        cursor=BD.query("Contatos",
-                new String[]{"nome","fone"},
+        cursor = BD.query("Contatos",
+                new String[]{"nome", "fone"},
                 null,
                 null,
                 null,
                 null,
                 null,
                 null);
-        if (cursor.getCount() !=0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             MostraDados();
-        }else{
-            msg("Cadastro não encotrado");
+        } else {
+            Msg.mensagem("Cadastro não encotrado", this);
         }
     }
 
     // Mosta dados
-    public void MostraDados(){
+    public void MostraDados() {
         int nome = cursor.getColumnIndex("nome");
-       int contato = cursor.getColumnIndex("fone");
+        int contato = cursor.getColumnIndex("fone");
         EdNome.setText(cursor.getString(nome));
         EdContato.setText(cursor.getString(contato));
     }
 
-
     // Poximo registro
-    public void  ProximoRegistro( View V){
+    public void ProximoRegistro(View V) {
         try {
             cursor.moveToNext();
             MostraDados();
-        }catch (Exception Ex){
-            if (cursor.isAfterLast()){
-                msg("Não exitem mais registros");
-            }else{
-                msg("Erro ao procurar registros");
+        } catch (Exception Ex) {
+            if (cursor.isAfterLast()) {
+                Msg.mensagem("Não exitem mais registros", this);
+            } else {
+                Msg.mensagem("Erro ao procurar registros", this);
             }
         }
     }
 
     // Registro  anterior
-    public void  AnteriorRegistro( View V){
+    public void AnteriorRegistro(View V) {
         try {
             cursor.moveToPrevious();
             MostraDados();
-        }catch (Exception Ex){
-            if (cursor.isBeforeFirst()){
-                msg("Não exitem mais registros");
-            }else{
-                msg("Erro ao procurar registros");
+        } catch (Exception Ex) {
+            if (cursor.isBeforeFirst()) {
+                Msg.mensagem("Não exitem mais registros", this);
+            } else {
+                Msg.mensagem("Erro ao procurar registros", this);
             }
         }
     }
 
     // Fechar tela
-    public  void fechaTela(View V){
-       this.finish();
+    public void fechaTela(View V) {
+        this.finish();
     }
 
-    // Mensagens
-    public  void  msg( String txt){
-        AlertDialog.Builder msg = new AlertDialog.Builder(this);
-        msg.setMessage(txt);
-        msg.setNegativeButton("OK",null);
-        msg.show();
-
-    }
 }
