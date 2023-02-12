@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
     Button BtnSalvar;
     Button BtnSair;
 
-    String NomeBanco = "BancoAgenda";
-    String NomeTabela = "Contatos";
+      // Banco de dados {OBJ}
+    SQLiteDatabase BD=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +44,68 @@ public class MainActivity extends AppCompatActivity {
         BtnSair= (Button)findViewById(R.id.Btn_sair);
 
 
-        Banco.CriarAbrirBD(NomeBanco,this);
-        Banco.ApagarTabela(NomeTabela);
-        Banco.AbrirTabela(NomeTabela,this);
-        Banco.FecharDB();
-       // Log.v("inic","Aplicativo Iniciado");
+        CriarAbrirBD();
+        AbrirTabela();
+        fecharDB();
+        Log.v("inic","Aplicativo Iniciado");
     }
 
-    // Adicionar Dados
-    public  void AdicionarDados( View V) {
-            Banco.CriarAbrirBD(NomeBanco,this);
-            Banco.AdicionarDados(EdNome.getText().toString(),EdContato.getText().toString(),this);
-            Banco.FecharDB();
-            EdNome.setText(null);
-            EdContato.setText(null);
+    // Criar banco de dados / Se não existir sera criado
+    public  void  CriarAbrirBD(){
+        try {
+            BD=openOrCreateDatabase("BancoAgenda",MODE_PRIVATE,null);
+        }catch ( Exception ex){
+            msg("Erro em criar banco de dados.");
+        }
     }
 
-   // Abrindo tela de colsulta
+    public  void AbrirTabela() {
+        try {
+            BD.execSQL("CREATE TABLE IF NOT EXISTS Contatos(id INTEGER PRIMARY KEY, nome TEXT, fone Text );");
+        } catch (Exception ex) {
+            msg("Erro ao criar tabela Contatos.");
+        }
+    }
+
+ //
+
+    // Fechar Banco de Dados
+   public  void fecharDB(){
+        BD.close();
+   }
+
+
+    // Abrindo tela de colsulta
     public void AbrirTelaConsulta( View V){
         Intent telaConsulta = new Intent(this, tela_consulta.class);
         startActivity(telaConsulta);
 
     }
 
-    //Sair do Aplicativo
+    public  void AdicionarDados( View V) {
+        String StNome, StContact;
+        StNome = EdNome.getText().toString();
+        StContact = EdContato.getText().toString();
+        if (StNome == " " || StContact == " ") {
+            msg("Campos não podem ser vazios");
+            return;
+        }
+
+        CriarAbrirBD();
+        try {
+            BD.execSQL("INSERT INTO COntatos (nome,fone) VALUES ('" + StNome + "','" + StContact + "')");
+        } catch (Exception Ex) {
+            msg("Erro ao adicionar contato");
+        } finally {
+            msg("COntato adicionado com susseço");
+        }
+      fecharDB();
+        EdNome.setText(null);
+        EdContato.setText(null);
+    }
+
+
+   //Sair do Aplicativo
     public  void sair(View V){
        /* Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -78,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public  void  msg( String txt){
+        AlertDialog.Builder msg = new AlertDialog.Builder(this);
+        msg.setMessage(txt);
+        msg.setNegativeButton("OK",null);
+        msg.show();
 
+    }
 
 }
