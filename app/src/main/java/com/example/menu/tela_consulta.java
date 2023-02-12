@@ -7,9 +7,14 @@ import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class tela_consulta extends AppCompatActivity {
 
@@ -18,6 +23,7 @@ public class tela_consulta extends AppCompatActivity {
 
     Cursor cursor;
 
+ArrayList<String> Nomes = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +36,18 @@ public class tela_consulta extends AppCompatActivity {
 
        cursor=Banco.BuscaDados(this);
         if (cursor.getCount() != 0) {
-
             MostraDados();
+
+            cursorToStringArray(cursor,Nomes,"nome");
+            for( String n: Nomes ){
+                Log.v("Nomes",n);
+            }
         } else {
             Msg.mensagem("Cadastro não encotrado", this);
         }
+
+
+
     }
 
 
@@ -79,4 +92,15 @@ public class tela_consulta extends AppCompatActivity {
         this.finish();
     }
 
-}
+    public  static  void cursorToStringArray( Cursor c,
+                                              ArrayList < String > arrayList, String columnName) {
+        int columnIndex = c.getColumnIndex(columnName);
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            arrayList.add(c.getString(columnIndex));
+        } // de w w w . _ _ _ _ j a v a 2 s . com o m
+
+    }
+
+
+
+    }
