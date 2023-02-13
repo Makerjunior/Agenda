@@ -49,10 +49,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
     // Abrindo tela de colsulta
     public void AbrirTelaConsulta( View V){
         Intent telaConsulta = new Intent(this, tela_consulta.class);
