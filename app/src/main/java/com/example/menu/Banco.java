@@ -8,12 +8,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.content.ContextWrapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //import android.content.Context.MODE_PRIVATE;
-public  class Banco {
+public  class Banco extends  DebugBanco {
     static SQLiteDatabase BD=null;
     static Cursor cursor;
     static String NomeBanco;
     static  String Tabela;
+
 
      // Criar banco de dados / Se não existir sera criado
     public static void  CriarAbrirBD(String NomeBD,Activity Atc){
@@ -80,4 +85,7 @@ public  class Banco {
         cursor.moveToFirst();
           return cursor;
     }
+
+
+
 }

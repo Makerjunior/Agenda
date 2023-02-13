@@ -15,6 +15,7 @@ import android.widget.EditText;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class tela_consulta extends AppCompatActivity {
 
@@ -38,10 +39,12 @@ ArrayList<String> Nomes = new ArrayList<>();
         if (cursor.getCount() != 0) {
             MostraDados();
 
-            cursorToStringArray(cursor,Nomes,"nome");
-            for( String n: Nomes ){
+             // Debug
+            for( String n: Banco.getCamposColuna(cursor,"nome")){
                 Log.v("Nomes",n);
             }
+
+
         } else {
             Msg.mensagem("Cadastro não encotrado", this);
         }
@@ -92,15 +95,5 @@ ArrayList<String> Nomes = new ArrayList<>();
         this.finish();
     }
 
-    public  static  void cursorToStringArray( Cursor c,
-                                              ArrayList < String > arrayList, String columnName) {
-        int columnIndex = c.getColumnIndex(columnName);
-        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-            arrayList.add(c.getString(columnIndex));
-        } // de w w w . _ _ _ _ j a v a 2 s . com o m
 
-    }
-
-
-
-    }
+}
