@@ -1,19 +1,16 @@
-package com.example.menu;
+package com.example.menu.banco;
 
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.View;
 import android.content.ContextWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.menu.Msg;
 
 //import android.content.Context.MODE_PRIVATE;
-public  class Banco extends  DebugBanco {
+public  class Banco extends DebugBanco {
     static SQLiteDatabase BD=null;
     static Cursor cursor;
     static String NomeBanco;
